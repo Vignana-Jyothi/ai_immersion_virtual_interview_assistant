@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Interview Assistant</title>
+    <style>
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Container for the form */
+        .container {
+            max-width: 75%;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff; /* White background for form */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: #fefefe; /* Soft light gray for background */
+        }
+
+        /* Heading Styling */
+        h1 {
+            text-align: center;
+            color: #4c56af; /* Blue color */
+            font-size: 36px;
+            margin-bottom: 20px;
+            background-color: #f1f8ff; /* Light blue background */
+            padding: 10px;
+            border-radius: 10px;
+        }
+        h1 {
+    text-align: center;
+    color: #fff; /* White text color */
+    font-size: 36px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #5bfcc4, #f593e4, #71a4f0); /* Gradient background */
+}
+
+        /* Label Styling */
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+            background-color: #f7fafc; /* Light grey for label */
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        /* Textarea Styling */
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            resize: vertical;
+            background-color: #f4f8fc; /* Light blueish background */
+        }
+
+        /* Button Styling with Gradient and Hover Effects */
+        .outer-cont {
+            display: inline-block;
+            padding: 12px 20px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            background: linear-gradient(90deg, #5bfcc4, #f593e4, #71a4f0); /* Gradient colors */
+            border-radius: 12px;
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow:
+                inset 0px 0px 5px #ffffffa9,
+                inset 0px 35px 30px #000,
+                0px 5px 10px #000000cc;
+            text-shadow: 1px 1px 1px #000;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .outer-cont::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            border-radius: 12px;
+            filter: blur(0);
+            z-index: -1;
+            box-shadow: none;
+            background: conic-gradient(
+                #00000000 80deg,
+                #40baf7,
+                #f34ad7,
+                #5bfcc4,
+                #00000000 280deg
+            );
+            transition: all 0.3s ease;
+        }
+
+        .outer-cont:hover::before {
+            filter: blur(15px);
+        }
+
+        .outer-cont:active::before {
+            filter: blur(5px);
+            transform: translateY(1px);
+        }
+
+        .outer-cont:active {
+            box-shadow:
+                inset 0px 0px 5px #ffffffa9,
+                inset 0px 35px 30px #000;
+            margin-top: 3px;
+        }
+
+        /* Response Box Styling */
+        .response {
+            background-color: #f9f9f9; /* Light grey background for the response */
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 2px solid #ccc;
+            font-size: 16px;
+            background-color: #f7fafd; /* Soft blue-grey background */
+        }
+
+        .response h3 {
+            font-size: 24px;
+            color: #4c56af; /* Blue color for response heading */
+            margin-bottom: 15px;
+            background-color: #f0f7ff; /* Light blue background */
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .response p {
+            margin: 10px 0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .response strong {
+            color: #4c56af; /* Blue color for strong text */
+        }
+
+        /* Adjusting for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 90%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            label {
+                font-size: 16px;
+            }
+
+            .outer-cont {
+                padding: 10px 15px;
+                font-size: 1rem;
+            }
+
+            .response {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Virtual Interview Assistant</h1>
+    <form action="/ask" method="post">
+        <label for="question">Ask an interview-related question:</label>
+        <textarea id="question" name="question" placeholder="Type your question here..." required></textarea>
+        <!-- Updated button with .outer-cont class -->
+        <button class="outer-cont" type="submit">Ask</button>
+    </form>
+
+    {% if response %}
+    <div class="response">
+        <h3>Assistant's Response:</h3>
+        <div>{{ response | safe }}</div>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
